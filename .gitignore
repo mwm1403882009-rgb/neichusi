@@ -1,0 +1,12 @@
+.tools/
+build/
+dist/
+node_modules/
+signing/
+*.apk
+*.idsig
+*.jks
+*.keystore
+*.log
+.env*
+

@@ -6,6 +6,17 @@ Neichusi is an Android cooking assistant for AI recipe recommendations, weekly m
 
 当前版本：**0.1.4**。普通用户可直接安装 APK，无需运行源码；AI 功能需要配置自己的模型服务，服务商可能收取调用费用。本项目不提供免费模型额度。
 
+# app界面
+<img width="1260" height="2716" alt="6e155018d842b9c9963e270aefb5b10f" src="https://github.com/user-attachments/assets/685ac303-6078-4e10-9ebf-68b315a0c973" />
+神厨小福贵：展示多道菜推荐、对话和安排一餐。
+<img width="1260" height="2718" alt="810d2cba5ee5cec27dbe74ee3a4aec9c" src="https://github.com/user-attachments/assets/209b2d51-9d1e-49ef-884e-31de96cfc286" />
+一周食谱：展示餐次、用料和费用。
+<img width="1260" height="2711" alt="d60d3d4843f86c83dc58b18890e09ccf" src="https://github.com/user-attachments/assets/77709052-bcd0-4905-bec0-1ffd5c084bc5" />
+我的菜谱：展示分类和菜谱详情。
+<img width="1260" height="2717" alt="c4c922f7268f8fe0c6b4d5a145affe8d" src="https://github.com/user-attachments/assets/9057e99c-acb2-4db1-ac3b-7a94f2cc6f98" />
+冰箱库存：展示食材、单价和剩余数量。
+<img width="1260" height="2717" alt="706bd1a7d919fd35be5cdc039f90160b" src="https://github.com/user-attachments/assets/33c7734f-b368-4d96-84d8-fbc0d504036e" />
+配置模型、token用量
 ## 下载与开始使用
 
 请到 [Releases](https://github.com/mwm1403882009-rgb/neichusi/releases) 查看已发布的 APK 安装包，文件名为 `neichusi-android-0.1.4.apk`。如果列表为空，表示安装包尚未发布。请勿把源码 ZIP 当作安装包。

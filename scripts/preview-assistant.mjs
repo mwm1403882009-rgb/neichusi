@@ -1,0 +1,9 @@
+// Isolated UI fixture on port 4180; never bundled into the APK, no model request or key.
+import http from 'node:http';
+import fs from 'node:fs';
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../dist/web/',import.meta.url));
+const rows=['青椒炒里脊','番茄里脊','葱爆里脊'].map((name,i)=>({id:'ui-fixture-'+i,name,reason:['鲜香微辣，适合配米饭','清淡酸甜，番茄汁拌饭','葱香浓郁，快炒嫩口'][i],ingredients:['猪肉 1份',i===1?'番茄 1个':i===2?'大葱 1根':'青椒 1个'],steps:['里脊切片，按口味少量调味后腌制。','热锅少油，炒熟里脊，再加入配菜炒至熟透。'],servings:null,cost:null,notes:'界面回归用模拟菜谱，不是实际模型输出。',source:'神厨小福贵 · AI建议',tags:['AI建议']}));
+const values={'ysf-fugui-chat-v1':[{id:'ui-request',role:'user',text:'推荐几道猪里脊的菜（界面测试）'},{id:'ui-response',role:'assistant',text:'这里是三个模拟候选，用于验证选择后安排和收藏的界面；未调用真实模型。',candidates:rows}],'ysf-fridge-v2':[{id:'ui-pork',name:'猪肉',type:'里脊',amount:500,unit:'g',portions:2,totalPrice:20,consumedFraction:0}]};
+const seed=`if(!localStorage.getItem('neichusi:assistant-ui-fixture')){const values=${JSON.stringify(values)};for(const [key,value]of Object.entries(values))localStorage.setItem('neichusi:'+key,JSON.stringify(value));localStorage.setItem('neichusi:assistant-ui-fixture','1');}`;
+http.createServer((req,res)=>{const name=new URL(req.url,'http://localhost').pathname;if(name==='/fixture.js'){res.setHeader('Content-Type','text/javascript');res.end(seed);return;}const file={'/':'index.html','/index.html':'index.html','/app.js':'app.js','/app.css':'app.css'}[name];if(!file){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':'text/html; charset=utf-8');let data=fs.readFileSync(root+file);if(file==='index.html')data=data.toString().replace('</head>','<script src="/fixture.js"></script></head>');res.end(data);}).listen(4180,'127.0.0.1',()=>console.log('Isolated assistant UI fixture (no real AI): http://127.0.0.1:4180'));

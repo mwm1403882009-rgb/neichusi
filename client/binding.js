@@ -1,0 +1,3 @@
+const expressionCache=new Map();
+export function evaluate(expression,scope){try{let fn=expressionCache.get(expression);if(!fn){fn=new Function('scope','with(scope){return ('+expression+')}');expressionCache.set(expression,fn);}return fn(new Proxy(scope,{has:()=>true,get:(target,key)=>key===Symbol.unscopables?undefined:key in target?target[key]:undefined}));}catch{return undefined;}}
+export function value(raw,scope){if(raw===true)return true;if(typeof raw!=='string')return raw;if(raw.startsWith('{{')&&raw.endsWith('}}')&&raw.indexOf('}}')===raw.length-2)return evaluate(raw.slice(2,-2),scope);return raw.replace(/{{([\s\S]*?)}}/g,(_,expr)=>evaluate(expr,scope)??'');}
